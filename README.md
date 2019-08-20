@@ -1,62 +1,33 @@
-# Starrier
+# DeepIn
 
-[![Build Status](https://travis-ci.org/Starrier/Starrier.svg?branch=master)](https://travis-ci.org/Starrier/Starrier)
+> This the repo. for all knowledge which have learned.
 
-[www.starrier.org](http://www.starrier.org)
+---
+description: Document all the content of the learning back end
 
-----
+## The Important Thing:
 
-## Blog build with Node.js (Express)
+**All of the backend-learning content come from the Internet,part or all of it is non-original,and the Gitbook and GitHub repository content is just for review and use in the future.Thank you.**
 
-There are two versions of this blog. One of them is the Node.js version, and the other one is Spring Boot wih Spring Cloud version.
+## 13.00- 2018-11-19
 
-> The version of Node is in the branch named node, and the version tag is suffixed with node.
+### initial
 
-and
+* Create Project On Gitbook For Backend And Synchronize To Github Via Gitbook
 
-> The version of SpringBoot is in the branch named node,and the version tag is suffixed with spring.
+## 12.00 - 2018-11-20
 
-## Developer
+### Added
 
-**participant**:
+* Create some new floder to use for some day and write some content on JVM.
 
-[Starrier](https://github.com/Starriers)
+## 11.30 - 2018-11-21
 
-And if you wants to test the version of the Node, please follow the steps below:
+Added
 
-### first
+* Create new floder Spring Cloud 
+* Add Spring Cloud Gateway
 
-> npm install
+## 15.36 - 2018-11-22
 
-### second
-
-> npm start
-
-### thrid
-
-> localhost:3000
-
-## Nginx Reverse Proxy
-
-I use **Nginx** as the reverse proxy server,and here are some of the configurations I used when testing locally.
-
-``` ngnix
- upstream Starrier{
-        server 127.0.0.1:3000;
-        keepalive 64;
-    }
-
-    server {
-        listen       80 default_server;
-        listen       [::]:80 default_server;
-        server_name  127.0.0.1:3000;
-
-        #charset koi8-r;
-
-        #access_log  logs/host.access.log  main;
-
-        location / {
-           proxy_pass http://Starrier;
-           proxy_http_version 1.1;
-        }
-```
+* 

@@ -1,9 +1,4 @@
----
-title: git-cherry-pick
-date: 2019-02-19 10:06:32
-tags: git
-index_img: ../post_img/while-if.jpeg
----
+
 
 ## git-cherry-pick
 

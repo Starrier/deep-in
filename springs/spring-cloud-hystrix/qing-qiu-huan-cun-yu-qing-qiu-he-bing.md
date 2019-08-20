@@ -1,0 +1,64 @@
+# 请求缓存 与 请求合并
+
+Hystrix 与 Redis 缓存不同，就是如果数据存到了缓存，那么任意用户再次请求都会在缓存中取出数据？其实不是这样。Hystrix 缓存仅限于当前线程内，如果重复调用相同的服，依赖会返回缓存的数据，通俗解释就是，Hystrix 缓存是基于 request 的，在当次请求内对同一个依赖服务的多次调用，除了第一次是真实调用，其余的会使用 Hystrix 缓存。
+
+## 使用类来实现
+
+## 使用注解实现
+
+1. @CacheResult  使用该注解后，结果会被缓存，同时它要和 @HystrixComman 注解一起使用，注解参数为 cacheKeyMethod
+2. @CacheRemove 清除缓存，需要制定 commandKey，注解参数为 commanKey，cacheKeyMethod
+3. @CacheKey 指定请求命令参数，默认使用方法所有参数作为 key，注解属性为 value。一般在查询的接口上使用 CacheResult，在更新接口中加上 @CacheRemove。
+
+### 使用 @CacheResult
+
+```java
+@CacheResult(cacheKeyMethod = "getCacheKey")
+    @HystrixCommand(commandKey = "findUserById", 
+      groupKey = "UserService", 
+      threadPoolKey = "userServiceThreadPool")
+    public UserVO findById(Long id) {
+        ResponseEntity<UserVO> user = 
+        restTemplate.getForEntity("http://users-service/user?id={id}", 
+                                     UserVO.class, id);
+        return user.getBody();
+    }
+
+    public String getCacheKey(Long id) {
+        return String.valueOf(id);
+    }
+```
+
+ @CacheResult注解中的cacheKeyMethod用来标示缓存key\(cacheKey\)的生成函数。函数的名称可任意取名，入参和标注@CacheResult的方法是一致的，返回类型是String。
+
+### 使用 @CacheKey
+
+```java
+@CacheResult
+    @HystrixCommand(commandKey = "findUserById",
+     groupKey = "UserService",
+threadPoolKey = "userServiceThreadPool")
+    public UserVO findById2(@CacheKey("id") Long id) {
+        ResponseEntity<UserVO> user = 
+        restTemplate.getForEntity("http://users-service/user?id={id}",
+                              UserVO.class, id);
+        return user.getBody();
+    }
+```
+
+ 标注@HystrixCommand注解的方法，使用@CacheKey标注需要指定的参数作为缓存key。
+
+### 使用 @CacheRemove
+
+```java
+ @CacheRemove(commandKey = "findUserById")
+    @HystrixCommand(commandKey = "updateUser",
+    groupKey = "UserService",
+    threadPoolKey = "userServiceThreadPool")
+    public void updateUser(@CacheKey("id")UserVO user){
+        restTemplate.postForObject("http://users-service/user",user,UserVO.class);
+    }
+```
+
+ **@CacheRemove必须指定commandKey，否则程序无法找到缓存位置。**
+
