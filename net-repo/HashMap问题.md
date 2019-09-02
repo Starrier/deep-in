@@ -1,0 +1,11 @@
+# HashMap 问题
+
+什么时候发生 ReHash
+
+在介绍 HashMap 的内部实现机制时提到了两个参数，
+DEFAULT_INITIAL_CAPACITY 和 DEFAULT_LOAD_FACTOR，
+DEFAULT_INITIAL_CAPACITY是table数组的容量，DEFAULT_LOAD_FACTOR则是为了最大程度避免哈希冲突，提高HashMap效率而设置的一个影响因子，将其乘以DEFAULT_INITIAL_CAPACITY就得到了一个阈值threshold，当HashMap的容量达到threshold时就需要进行扩容，这个时候就要进行ReHash操作了，可以看到下面addEntry函数的实现，当size达到threshold时会调用resize函数进行扩容。
+
+什么时候扩容：当向容器添加元素的时候，会判断当前容器的元素个数，如果大于等于阈值(知道这个阈字怎么念吗？不念fa值，念yu值四声)---即当前数组的长度乘以加载因子的值的时候，就要自动扩容啦。
+
+扩容(resize)就是重新计算容量，向HashMap对象里不停的添加元素，而HashMap对象内部的数组无法装载更多的元素时，对象就需要扩大数组的长度，以便能装入更多的元素。当然Java里的数组是无法自动扩容的，方法是使用一个新的数组代替已有的容量小的数组，就像我们用一个小桶装水，如果想装更多的水，就得换大水桶。

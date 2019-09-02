@@ -79,3 +79,11 @@ DDL 语句，如数据库的 CREATE 或 DROP 语句，以及表或存储例程�
 DDL 语句，LOAD DATA INFILE 、 ANALYZE TABLE 以及与 replication 相关的语句等，会导致隐式 COMMIT。
 {% endhint %}
 
+# AICD - 2
+
+### 脏读
+
+### 不可重复读
+
+### 幻读
+

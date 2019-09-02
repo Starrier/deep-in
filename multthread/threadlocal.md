@@ -58,3 +58,28 @@ public class ThreadLocalTest implements Runnable {
 在服务器上，可能会保持一个线程池，那么 ThreadLoacl 变量会在响应客户端之前被移除，因为当前线程可能被下一个请求重复使用。而且，如果在使用完毕后不进行处理，它所保持的任何一个对类的引用，这个类会作为部署应用的一部分加载进啦，将被保留在永久堆栈中，永远不会被垃圾回收机制回收。
 {% endhint %}
 
+
+```java
+    public void set(T value) {
+        Thread t = Thread.currentThread();
+        ThreadLocalMap map = getMap(t);
+        if (map != null) {
+            map.set(this, value);
+        } else {
+            createMap(t, value);
+        }
+    }
+```
+
+
+
+```java
+/**
+ * 获取与 ThreadLocal 关联的映射。
+*  在 Inheritable ThreadLocal中 重写。
+ */
+ ThreadLocalMap getMap(Thread t) {
+        return t.threadLocals;
+    }
+```
+

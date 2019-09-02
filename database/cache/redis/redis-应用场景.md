@@ -1,11 +1,4 @@
----
-title: redis-action
-date: 2019-02-16 02:02:43
-tags: redis
-index_img: ../post_img/enum.jpeg
----
-
-## Redis 的应用场景
+# Redis 的应用场景
 
 ### 1. 缓存：热数据
 

@@ -8,7 +8,7 @@ AtomicInteger 使用 value 来保存值，value 是 volatile 的，保证了可�
 
 对于 get 方法直接返回 value，对于自增一或添加值使用 CAS 自旋锁，使用了一个死循环，如果 CAS 返回 true 就可以退出循环。 
 
-对于CAS 全称是compare and swap比较和交换,CAS需要三个操作数，一个是变量内存地址，一个是excepted过期值，一个是现在要更新的值，我们操作的时候仅当V符合旧预期的值的时候才能更新我们新的。对于它的自增的操作，首先是卸载一个for循环里面然后获得当前的值，给这个值+1，然后进行cvs要是失败会再次Get\(\)最新值再次写.
+对于CAS 全称是compare and swap比较和交换,CAS需要三个操作数，一个是变量内存地址，一个是excepted过期值，一个是现在要更新的值，我们操作的时候仅当V符合旧预期的值的时候才能更新我们新的。对于它的自增的操作，首先是卸载一个for循环里面然后获得当前的值，给这个值+1，然后进行cas要是失败会再次Get\(\)最新值再次写.
 
 原子更新基本类型主要包括3个类：
 
@@ -81,7 +81,6 @@ return unsafe.getAndSetInt(this, valueOffset, newValue);
       return unsafe.getAndAddInt(this, valueOffset, delta) + delta; } 
       //省略一些不常用的方法.... 
       }
-
 ```
 
 通过上述的分析，可以发现AtomicInteger原子类的内部几乎是基于前面分析过Unsafe类中的CAS相关操作的方法实现的，这也同时证明AtomicInteger是基于无锁实现的，这里重点分析自增操作实现过程，其他方法自增实现原理一样。

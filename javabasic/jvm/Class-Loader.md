@@ -1,9 +1,3 @@
----
-title: Class Loader
-date: 2019-02-13 22:33:28
-tags: JVM
-index_img: ../static/static.jpeg
----
 # JVM Class Loading Process
 
 ```java

@@ -31,3 +31,6 @@ Added
 ## 15.36 - 2018-11-22
 
 * 
+## 2019/8/13
+
+* add menu for the repo. read more and details on [this way]()

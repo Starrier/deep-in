@@ -1,10 +1,3 @@
----
-title: circulate
-date: 2019-02-17 23:13:45
-tags: Java
-index_img: ../post_img/circulate.jpeg
----
-
 ## Circulate
 
 ### for

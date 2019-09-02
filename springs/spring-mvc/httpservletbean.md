@@ -1,5 +1,8 @@
 # HttpServletBean
 
+DispatchServlet 本质仍然是一个 Servlet，只是多了一些和 SpringMVC 框架有关的功能。
+
+
 ```java
 @Override
 	public final void init() throws ServletException {
