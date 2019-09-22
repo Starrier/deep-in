@@ -1,0 +1,11 @@
+# MySQL time
+
+1. 获取今天，昨天的 0 点时间戳
+
+```sql
+## 昨天： 
+UNIX_TIMESTAMP(CAST(SYSDATE()AS DATE) - INTERVAL 1 DAY)
+
+## 今天：
+UNIX_TIMESTAMP(CAST(SYSDATE()AS DATE))
+```
